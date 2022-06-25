@@ -43,7 +43,12 @@ This is a wiki for the Original Prusa printers created by Josef Prusa and any pr
 - [Prusa Official Firmware](https://github.com/prusa3d/Prusa-Firmware)
 - [Prusa Official MK3 Firmware G-Code Reference](https://github.com/prusa3d/Prusa-Firmware/blob/MK3/Firmware/Marlin_main.cpp#L152)
 
+
+### Configurations
+- [Klipper Prusa Configs](https://github.com/Prutsium/3D-Druckerplausch-Klipper/tree/main/Klipper_cfg/Prusa_Universal_Config_Revised)
+
 ### Slicing Software
+- [SuperSlicer](https://github.com/supermerill/SuperSlicer/releases)
 - [Slicer Profiles](Slicer_Profiles.md)
 - [Test Prints](Test_Prints.md)
 
