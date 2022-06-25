@@ -189,26 +189,29 @@ Mesh Leveling is fully parametric. As a result it is possible to configure it fo
 
     [bed_mesh]
     speed: 100
-    min_point: 11,1
-    max_point: 215,193
+    mesh_min: 11,1
+    mesh_max: 215,193
 
 Below is what a Mesh Bed Leveling configuration would look like with all options set:
 
     [bed_mesh]
-    speed: 100
+    speed: 120
     horizontal_move_z: 5
-    samples: 1
-    sample_retract_dist: 2.0
-    min_point: 11,1
-    max_point: 215,193
-    probe_count: 3,3
-    fade_start: 1.0
-    fade_end: 10.0
-    move_check_distance: 5.0
-    split_delta_z: .025
+    mesh_min: 11, 1
+    mesh_max: 215, 193
+    probe_count: 4, 4
+    # Advanced Config
+    ## Mesh interpolation
     mesh_pps: 2,2
     algorithm: lagrange
-    bicubic_tension: .2
+    bicubic_tension: 0.2
+    ## Move Splitting
+    move_check_distance: 5.0
+    split_delta_z: .025
+    ## Mesh Fade
+    fade_start: 1
+    fade_end: 10
+    fade_target: 0
 
 Be aware that when dynamically generating points the distance between each point is calculated. If the distance is not a whole number, the value will be floored to the last hundredth. This will result in your maximum points being adjusted inward slightly. Also keep in mind that the min and max points refer to the position of the nozzle, not the probe. Make sure you do not choose points that will move the probe off of the bed.
 
@@ -222,19 +225,11 @@ The speed at which the bed is probed.
 
 The distance to raise the toolhead between probes. Default is 5mm.
 
--   samples:
-
-The number of samples to take for each probe point.
-
--   sample_retract_dist:
-
-The distance to retract the tool between samples.  Only applies when samples > 1.
-
--   min_point:
+-   mesh_min:
 
 The minimum start point (x,y) on the grid to generate. This parameter must be provided.
 
--   max_point:
+-   mesh_max:
 
 The maximum start point (x,y) on the grid to generate. Note that this may not be the 'last' point if probing an even number of Y values on the grid. This parameter must be provided.
 
@@ -249,6 +244,10 @@ The z position in which to start fading out z_adjustment. Default is 1.0
 -   fade_end:
 
 The z position in which fading will complete. If fade_end is less than or equal to fade_start then fading will be disabled. Be careful with this setting, fading too quickly will likely result in a failed print, or could potentially crash the nozzle into the bed if done near Z0. Default is 10.0
+
+-   fade_target:
+
+The fade_target can be thought of as an additional Z offset applied to the entire bed after fade completes. Generally speaking we would like this value to be 0, however there are circumstances where it should not be.
 
 -   move_check_distance:
 
